@@ -60,10 +60,9 @@ function Install-AV-Scan{
     Start-Process -FilePath $env:TEMP\avg_antivirus_free_setup.exe
 
     Write-Host ""
-    Read-Host "AVG anti-virus installation initiated, follow prompts, once completed, press ENTER to conduct a scan..."
+    Read-Host "AVG anti-virus installation initiated, follow prompts, once completed, press ENTER to to return to menu..."
 
-    # Next step TBD
-    exit
+    # Next step, Run a scan TBD
 }
 
 while($true) {
