@@ -14,6 +14,10 @@
     # [Configure Automatic Updates in a Non–Active Directory Environment](https://learn.microsoft.com/de-de/security-updates/windowsupdateservices/18127499)
     # [How to Specify Screen Saver Timeout in Windows](https://www.tenforums.com/tutorials/118662-specify-screen-saver-timeout-windows.html)
     # [Set-ItemProperty](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-itemproperty?view=powershell-7.3)
+    # [Invoke-WebRequest](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-webrequest?view=powershell-7.3)
+    # [Out-File](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/out-file?view=powershell-7.3)
+    # [Start-Process](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process?view=powershell-7.3)
+
 
 # Main
 
@@ -45,7 +49,20 @@ function Enable-ScreenLock{
 
 function Install-AV-Scan{
 
+    # Declares $InstallPath Variable equal to location of AVG anti-virus software installation executable
+    $InstallPath = "https://www.avg.com/en-us/download-thank-you.php?product=FREEGSR#pc/avg_antivirus_free_setup.exe"
 
+    # Invokes a Web Request to copy AVG anti-virus installation executable to a temporary folder
+    Invoke-WebRequest -Uri $InstallPath -OutFile $env:TEMP\avg_antivirus_free_setup.exe
+
+    # Execute installation file saved in global TEMP variable
+    Start-Process -FilePath $env:TEMP\avg_antivirus_free_setup.exe
+
+    Write-Host ""
+    Read-Host "AVG anti-virus installation initiated, follow prompts, once completed, press ENTER to conduct a scan..."
+
+    # Next step TBD
+    exit
 }
 
 while($true) {
@@ -54,7 +71,7 @@ while($true) {
     Write-Host "-----------------------------------------------"
     Write-Host "1) Enable automatic Operating System updates"
     Write-Host "2) Enable automatic screen lock"
-    Write-Host "3) Install Anti-Virus and conduct scan"
+    Write-Host "3) Install AVG Anti-Virus and conduct scan"
     Write-Host "exit) Exit Workstation Configuration Wizard"
     Write-Host "-----------------------------------------------"
     $Selection = Read-Host "Please make a selection..."
