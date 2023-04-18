@@ -37,7 +37,7 @@ function Auto-OS-Update{
 
 function Enable-ScreenLock{
 
-    # Declares $RegPath Variable equal to location of OS update registry key
+    # Declares $RegPath Variable equal to location of ScreenSaveTimeOut value
     $RegPath = "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Control Panel\Desktop"
 
     # Use Set-ItemProperty command to set ScreenSaveTimeOut value to 300 seconds (5 minutes)
