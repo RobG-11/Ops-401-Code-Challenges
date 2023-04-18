@@ -1,6 +1,6 @@
 # Script: 01 - Automating Workstation Configuration
 # Author: Robert Gregor
-# Date of latest revision: 18APR23
+# Date of latest revision: 18 APR 23
 
 # Objectives
     # Write a PowerShell script that achieves the following objectives
