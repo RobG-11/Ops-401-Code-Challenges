@@ -37,6 +37,9 @@ from pythonping import ping
 
 def ping_userIP(user_IP):
 
+    # Declares ping_log variable equal to string
+    ping_log = "ping_log.txt"
+
     # For loop used to ping user supplied IP four times
     for i in range(4):
 
@@ -52,8 +55,13 @@ def ping_userIP(user_IP):
         # Declares current_time variable equal to time now and formats output
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
 
-        # Prints current_time, ping_status, and user-IP variables to screen
-        print(f"{current_time} - {ping_status} {user_IP}")
+        # Stores current_time, ping_status, and user-IP variables in ping_entry variable and prints output to screen
+        ping_entry = f"{current_time} - {ping_status} {user_IP}"
+        print(ping_entry)
+
+        # Opens ping_log file and 
+        with open(ping_log, "a") as file:
+            file.write(ping_entry + "\n")
 
         # Provides two second delay between ping commands
         time.sleep(2)
