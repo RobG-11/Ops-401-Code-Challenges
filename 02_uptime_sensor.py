@@ -48,9 +48,9 @@ def ping_userIP(user_IP):
 
         # Determines ping_status variable content case on ping_result.success() function return value
         if ping_result.success():
-            ping_status = "Network ACTIVE to"
+            ping_status = "Network ACTIVE to host"
         else:
-            ping_status = "Network INACTIVE to"
+            ping_status = "Network INACTIVE to host"
 
         # Declares current_time variable equal to time now and formats output
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
