@@ -24,7 +24,7 @@
 
 # My Sources
     # [Python Looping Through a Range](https://www.w3schools.com/python/gloss_python_for_range.asp)
-    # []()
+    # [Python append to a file](https://www.geeksforgeeks.org/python-append-to-a-file/)
 
 #!/usr/bin/env python3
 
