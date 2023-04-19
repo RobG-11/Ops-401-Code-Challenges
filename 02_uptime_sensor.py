@@ -20,11 +20,7 @@
     # [Python time sleep() Method](https://www.tutorialspoint.com/python/time_sleep.htm)
     # [Python while Loop Statements](https://www.tutorialspoint.com/python/python_while_loop.htm)
     # [Python Ping: How to ping with Python](https://www.ictshore.com/python/python-ping-tutorial/)
-    # [Ping 0.2: An implementation of ICMP ping in Python](https://pypi.org/project/ping/)
-
-# My Sources:
-    # []()
-    
+    # [Ping 0.2: An implementation of ICMP ping in Python](https://pypi.org/project/ping/)    
 
 #!/usr/bin/env python3
 
