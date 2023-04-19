@@ -40,8 +40,8 @@ def ping_userIP(user_IP):
     # Declares ping_log variable equal to string
     ping_log = "ping_log.txt"
 
-    # For loop used to ping user supplied IP four times
-    for i in range(4):
+    # While loop used to ping user supplied IP
+    while True:
 
         # Declares ping_result variable equal to output of ping command
         ping_result = ping(user_IP, count=1, timeout=1)
