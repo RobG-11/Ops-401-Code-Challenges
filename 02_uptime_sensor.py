@@ -30,7 +30,33 @@
 
 # Main
 
-import os, datetime, click
+import datetime
+import click
+import time
+from pythonping import ping
+
+def ping_userIP(user_IP):
+
+    # For loop used to ping user supplied IP four times
+    for _ in range(4):
+
+        # Declares ping_result variable equal to output of ping command
+        ping_result = ping(user_IP, count=1, timeout=1)
+
+        # Determines ping_status variable content case on ping_result.success() function return value
+        if ping_result.success():
+            ping_status = "Network ACTIVE to"
+        else:
+            ping_status = "Network INACTIVE to"
+
+        # Declares current_time variable equal to time now and formats output
+        current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+
+        # Prints current_time, ping_status, and user-IP variables to screen
+        print(f"{current_time} - {ping_status} {user_IP}")
+
+        # Provides two second delay between ping commands
+        time.sleep(2)
 
 while True:
     click.clear()
@@ -40,9 +66,17 @@ while True:
  
     # Requests user_IP input and converts to string
     user_IP = str(input("Please enter the IP address you would like to ping (or type 'exit'): "))
+    print()
 
+    # Conditional supporting exit functionality
     if user_IP == "exit":
-        print("\nYou have exited the uptime sensor program successfully!\n")
+        print("You have exited the uptime sensor program successfully!\n")
         exit()
+
+    # Call the ping_userIP function with the user_IP variable as an arguement
+    ping_userIP(user_IP)
+
+    # Enter to return to IP input
+    input("\nPress Enter to continue...")
 
 # End
