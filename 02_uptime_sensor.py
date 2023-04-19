@@ -55,7 +55,7 @@ def ping_userIP(user_IP):
         # Declares current_time variable equal to time now and formats output
         current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
 
-        # Stores current_time, ping_status, and user-IP variables in ping_entry variable and prints output to screen
+        # Stores current_time, ping_status, and user-IP variables as string in ping_entry variable and prints output to screen
         ping_entry = f"{current_time} - {ping_status} {user_IP}"
         print(ping_entry)
 
