@@ -1,4 +1,4 @@
-# Script: 02 - Uptime Sensor Tool
+# Script: 02 - Uptime Sensor Tool (Part 1)
 # Author: Robert Gregor
 # Date of latest revision: 18 APR 23
 
