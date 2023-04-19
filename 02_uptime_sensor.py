@@ -59,7 +59,7 @@ def ping_userIP(user_IP):
         ping_entry = f"{current_time} - {ping_status} {user_IP}"
         print(ping_entry)
 
-        # Opens ping_log file and 
+        # Creates ping_log file, opens it in append mode, and writes/appends ping_entry variable contents to file
         with open(ping_log, "a") as file:
             file.write(ping_entry + "\n")
 
