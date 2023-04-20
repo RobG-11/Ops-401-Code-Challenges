@@ -54,21 +54,22 @@ import time
 import smtplib
 from pythonping import ping
 from email.message import EmailMessage
+from getpass import getpass
 
-def send_mail(admin_email, admin_pswd, subject, body):
+def send_mail(admin_email, admin_password, subject, body):
 
-    # Creates EmailMessage class, sets message content to body arguement, assigns Subject, From, and To headers to corresponding function arguements
     msg = EmailMessage()
     msg.set_content(body)
     msg['Subject'] = subject
     msg['From'] = admin_email
     msg['To'] = admin_email
 
-    # Creates SMTP-SSL class, logs in to Gmail with user provided creds, sends email message, closes connection
-    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login(admin_email, admin_pswd)
-    server.send_message(msg)
-    server.quit()
+    # Creates SMTP class, starts TLS, logs in to Gmail with user provided creds, sends email message, closes connection
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(admin_email, admin_password)
+    server.sendmail(admin_email, admin_email, msg.as_string())
+    server.quit    
 
 def ping_userIP(admin_email, admin_pswd, host_IP):
 
@@ -85,14 +86,15 @@ def ping_userIP(admin_email, admin_pswd, host_IP):
 
         # Determines ping_status variable content case on ping_result.success() function return value
         if ping_result.success():
-            ping_status = "UP"
+            ping_status = "Host UP"
         else:
-            ping_status = "DOWN"
+            ping_status = "Host DOWN"
 
         # Conditional determines if status changed, if so determines content of email notification (subject, body), and calls send_mail function
-        if last_status is not None and last_status != ping_status:
+        if last_status is None or last_status != ping_status:
             subject = f"Host {host_IP} status changed"
             body = f"{current_time} - Host {host_IP} status changed from {last_status} to {ping_status}"
+            last_status = ping_result
             send_mail(admin_email, admin_pswd, subject, body)
 
         # Stores current_time, ping_status, and user-IP variables as string in ping_entry variable and prints output to screen
@@ -116,7 +118,7 @@ while True:
     # Requests user_IP input and converts to string
     print("\nTo exit the program at any prompt please type 'exit'")
     admin_email = str(input("\nPlease enter the Administrator's email address: "))
-    admin_pswd = str(input("\nPlease enter the Administrator's password: "))
+    admin_password = getpass("\nPlease enter the Administrator's password: ")
     host_IP = str(input("\nPlease enter the IP address of the host whose status you wish to monitor: "))
     print()
 
@@ -126,7 +128,7 @@ while True:
         exit()
 
     # Call the ping_userIP function with multiple arguements
-    ping_userIP(admin_email, admin_pswd, host_IP)
+    ping_userIP(admin_email, admin_password, host_IP)
 
     # Enter to return to IP input
     input("\nPress Enter to continue...")
