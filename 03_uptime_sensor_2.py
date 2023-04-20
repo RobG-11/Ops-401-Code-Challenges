@@ -58,6 +58,7 @@ from getpass import getpass
 
 def send_mail(admin_email, admin_password, subject, body):
 
+    # Creates EmailMessage class and assigns to msg variable, set content to body variable, and assigns subject, from, and To to variables
     msg = EmailMessage()
     msg.set_content(body)
     msg['Subject'] = subject
@@ -94,7 +95,7 @@ def ping_userIP(admin_email, admin_pswd, host_IP):
         if last_status is None or last_status != ping_status:
             subject = f"Host {host_IP} status changed"
             body = f"{current_time} - Host {host_IP} status changed from {last_status} to {ping_status}"
-            last_status = ping_result
+            last_status = ping_status
             send_mail(admin_email, admin_pswd, subject, body)
 
         # Stores current_time, ping_status, and user-IP variables as string in ping_entry variable and prints output to screen
