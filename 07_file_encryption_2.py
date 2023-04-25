@@ -54,7 +54,6 @@
 # Import libraries
 import os
 import zipfile
-import io
 from cryptography.fernet import Fernet
 
 def write_key():
