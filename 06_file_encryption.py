@@ -32,11 +32,15 @@
 
 # My Sources
     # [How to Clear Screen in Python?](https://www.scaler.com/topics/how-to-clear-screen-in-python/)
+    # [Data Compression and Archiving](https://docs.python.org/3/library/archiving.html)
+    # [Compressing and Extracting Files in Python](https://code.tutsplus.com/tutorials/compressing-and-extracting-files-in-python--cms-26816)
+
 
 #!/usr/bin/env python3
 
 # Import libraries
 import os
+import zipfile
 from cryptography.fernet import Fernet
 
 def write_key():
@@ -50,6 +54,10 @@ def write_key():
 def load_key():
     # Load and return key from current key.key file
     return open("key.key", "rb").read()
+
+# def compress_file(encrypt_file):
+#     with zipfile.ZipFile(encrypt_file, 'w') as compressed_file:
+#         compressed_file.zip.write('C:\\Stories\\Fantasy\\jungle.pdf', compress_type=zipfile.ZIP_DEFLATED)
 
 def encrypt_file():
     # Load encryption key
@@ -67,6 +75,17 @@ def encrypt_file():
     with open(encrypt_file, "wb") as file:
         file.write(encrypted_file)
 
+    # Request if user would like to compress output file to an archive
+    # archive_file = input(f"Would you like to compress {encrypt_file} to an archive (Y/N)?: ")
+
+    # Conditional determines if user chose compression, if so compress_file() funtion is executed
+    # if archive_file == "Y":
+    #     compress_file(encrypt_file)
+    # elif archive_file == "N":
+    #     pass
+    # else:
+    #     print("\nInvalid input please try again!")
+        
 def decrypt_file():
     # Load decryption key
     key = load_key()
