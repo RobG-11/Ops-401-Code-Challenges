@@ -165,11 +165,15 @@ def encrypt_folder():
                 # Write file to arcname
                 archive.write(file_path, arcname=arcname)
 
-    # Encrypt compressed folder
+    # Encrypt folder - Open compressed folder in binary read mode
     with open(compressed_folder_path, "rb") as file:
+        # Assigns contents of open file to variable
         file_data = file.read()
+    # Encrypts file_data and assigns contents to variable
     encrypted_file = f.encrypt(file_data)
+    # Opens compressed folder in binary write mode
     with open(compressed_folder_path, "wb") as file:
+        # Writes encrypted data to open file
         file.write(encrypted_file)
 
     print(f"\nYou have successfully encrypted folder {folder_path}")
