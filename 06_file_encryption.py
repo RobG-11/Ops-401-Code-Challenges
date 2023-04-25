@@ -55,9 +55,11 @@ def load_key():
     # Load and return key from current key.key file
     return open("key.key", "rb").read()
 
-# def compress_file(encrypt_file):
-#     with zipfile.ZipFile(encrypt_file, 'w') as compressed_file:
-#         compressed_file.zip.write('C:\\Stories\\Fantasy\\jungle.pdf', compress_type=zipfile.ZIP_DEFLATED)
+def compress_file(encrypt_file):
+
+    with zipfile.ZipFile(encrypt_file, 'w') as compressed_file:
+        compressed_file.write(encrypt_file, compress_type=zipfile.ZIP_DEFLATED)
+        print(f"\nYou have successfully compressed and archived {encrypt_file}")
 
 def encrypt_file():
     # Load encryption key
@@ -76,15 +78,15 @@ def encrypt_file():
         file.write(encrypted_file)
 
     # Request if user would like to compress output file to an archive
-    # archive_file = input(f"Would you like to compress {encrypt_file} to an archive (Y/N)?: ")
+    archive_file = input(f"Would you like to compress {encrypt_file} to an archive (Y/N)?: ")
 
-    # Conditional determines if user chose compression, if so compress_file() funtion is executed
-    # if archive_file == "Y":
-    #     compress_file(encrypt_file)
-    # elif archive_file == "N":
-    #     pass
-    # else:
-    #     print("\nInvalid input please try again!")
+    # Conditional determines if user would like compression, if so compress_file() funtion is executed with selected file as arguement
+    if archive_file == "Y":
+        compress_file(encrypt_file)
+    elif archive_file == "N":
+        pass
+    else:
+        print("\nInvalid input please try again!")
         
 def decrypt_file():
     # Load decryption key
