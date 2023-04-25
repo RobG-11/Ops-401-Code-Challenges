@@ -43,12 +43,14 @@
     # [Compressing and Extracting Files in Python](https://code.tutsplus.com/tutorials/compressing-and-extracting-files-in-python--cms-26816)
     # [Context Managers and Python's with Statement](https://realpython.com/python-with-statement/)
     # [zipfile — Work with ZIP archives](https://docs.python.org/3/library/zipfile.html)
+    # [Python's zipfile: Manipulate Your ZIP Files Efficiently](https://realpython.com/python-zipfile/)
 
 #!/usr/bin/env python3
 
 # Import libraries
 import os
 import zipfile
+import io
 from cryptography.fernet import Fernet
 
 def write_key():
@@ -138,6 +140,43 @@ def decrypt_string():
     # Print the decrypted message string
     print("\nDecrypted message: ", decrypted_string.decode())
 
+def encrypt_folder():
+    # Load decryption key
+    key = load_key()
+    # Create Fernet object with loaded key
+    f = Fernet(key)
+    # Get folder path to encrypt
+    folder_path = input("\nEnter path to folder to encrypt: ")
+    
+    # Compress Folder - Strips path from folder_path and set folder_name equal to target folder
+    folder_name = os.path.basename(folder_path)
+    # Appends .zip to folder_name
+    compressed_folder_path = folder_name + '.zip'
+    # Creates new zip file with ZIP_DEFLATED compression method and the highest compression level (9)
+    with zipfile.ZipFile(compressed_folder_path, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+        # Iterates over all items in folder_path with os.walk() function
+        for root, _, files in os.walk(folder_path):
+            # Iterates over all files in files list
+            for file in files:
+                # Creates full file path by joining root and file with os.path.join() function
+                file_path = os.path.join(root, file)
+                # Creats realtive path of file with os.path.relpath() function
+                arcname = os.path.relpath(file_path, folder_path)
+                # Write file to arcname
+                archive.write(file_path, arcname=arcname)
+
+    # Encrypt compressed folder
+    with open(compressed_folder_path, "rb") as file:
+        file_data = file.read()
+    encrypted_file = f.encrypt(file_data)
+    with open(compressed_folder_path, "wb") as file:
+        file.write(encrypted_file)
+
+    print(f"\nYou have successfully encrypted folder {folder_path}")
+
+def decrypt_folder():
+    exit
+
 # Execute write_key() function
 write_key()
 
@@ -152,7 +191,7 @@ while True:
         print("\n------------------------")
         print("Please choose an option:")
         print("------------------------")
-        print("1) Encrypt file\n2) Decrypt file\n3) Encrypt message string\n4) Decrypt message string\nexit) exit program")
+        print("1) Encrypt file\n2) Decrypt file\n3) Encrypt message string\n4) Decrypt message string\n5) Encrypt folder\n6) Decrypt folder\nexit) exit program")
         user_option = str(input("------------------------\n"))
 
         if user_option == "1":
@@ -163,10 +202,10 @@ while True:
             encrypt_string()
         elif user_option == "4":
             decrypt_string()
-        elif uuser_option == "3":
-            encrypt_string()
-        elif user_option == "4":
-            decrypt_string()
+        elif user_option == "5":
+            encrypt_folder()
+        elif user_option == "6":
+            decrypt_folder()
         elif user_option == "exit":
             print("\nExited successfully!\n")
             exit()
