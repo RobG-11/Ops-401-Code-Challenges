@@ -34,7 +34,8 @@
     # [How to Clear Screen in Python?](https://www.scaler.com/topics/how-to-clear-screen-in-python/)
     # [Data Compression and Archiving](https://docs.python.org/3/library/archiving.html)
     # [Compressing and Extracting Files in Python](https://code.tutsplus.com/tutorials/compressing-and-extracting-files-in-python--cms-26816)
-
+    # [Context Managers and Python's with Statement](https://realpython.com/python-with-statement/)
+    # [zipfile — Work with ZIP archives](https://docs.python.org/3/library/zipfile.html)
 
 #!/usr/bin/env python3
 
@@ -56,9 +57,11 @@ def load_key():
     return open("key.key", "rb").read()
 
 def compress_file(encrypt_file):
-
+    # With statement used to create context, zipfile.Zipfile function executed to write encrypt_file as compressed_file
     with zipfile.ZipFile(encrypt_file, 'w') as compressed_file:
+        # Write method called on compressed_file to add file to archive, ZIP_DEFLATED algorithm used to compress
         compressed_file.write(encrypt_file, compress_type=zipfile.ZIP_DEFLATED)
+        # Print comformation of compression
         print(f"\nYou have successfully compressed and archived {encrypt_file}")
 
 def encrypt_file():
@@ -78,7 +81,7 @@ def encrypt_file():
         file.write(encrypted_file)
 
     # Request if user would like to compress output file to an archive
-    archive_file = input(f"Would you like to compress {encrypt_file} to an archive (Y/N)?: ")
+    archive_file = input(f"\nWould you like to compress {encrypt_file} to an archive (Y/N)?: ")
 
     # Conditional determines if user would like compression, if so compress_file() funtion is executed with selected file as arguement
     if archive_file == "Y":
