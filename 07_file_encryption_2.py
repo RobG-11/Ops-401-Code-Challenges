@@ -44,6 +44,8 @@
     # [Context Managers and Python's with Statement](https://realpython.com/python-with-statement/)
     # [zipfile — Work with ZIP archives](https://docs.python.org/3/library/zipfile.html)
     # [Python's zipfile: Manipulate Your ZIP Files Efficiently](https://realpython.com/python-zipfile/)
+    # [Python os.walk() Method](https://www.tutorialspoint.com/python/os_walk.htm)
+    # [os.path — Common pathname manipulations](https://docs.python.org/3/library/os.path.html)
 
 #!/usr/bin/env python3
 
