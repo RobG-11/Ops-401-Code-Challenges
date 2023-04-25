@@ -1,6 +1,6 @@
-# Script: 06 - File Encryption (Part 1)
+# Script: 07 - File Encryption (Part II)
 # Author: Robert Gregor
-# Date of latest revision: 24 APR 23
+# Date of latest revision: 25 APR 23
 
 # Objectives
     # In Python, create a script that utilizes the cryptography library to:
@@ -21,6 +21,11 @@
             # Decrypt the string if in mode 4
                 # Print the cleartext to the screen
 
+    # PART II Objectives - Protecting Data at Rest
+        # Add a feature capability to your script to:
+            # Recursively encrypt a single folder and all its contents
+            # Recursively decrypt a single folder that was encrypted by this tool
+
 # Stretch Goals (Optional Objectives):
     # Prompt the user if the output file should be compressed to an archive
     # If user responds ‘y’ for yes, compress resulting file to an archive
@@ -29,6 +34,8 @@
 # Code Fellows Sources
     # [cryptography 40.0.2](https://pypi.org/project/cryptography/)
     # [How to Encrypt and Decrypt Files in Python](https://www.thepythoncode.com/article/encrypt-decrypt-files-symmetric-python)
+    # [Python: List Of Files In Directory And Subdirectories](https://appdividend.com/2020/01/20/python-list-of-files-in-directory-and-subdirectories/)
+    # [Recursive File and Directory Manipulation in Python](https://www.pythoncentral.io/recursive-file-and-directory-manipulation-in-python-part-1/)
 
 # My Sources
     # [How to Clear Screen in Python?](https://www.scaler.com/topics/how-to-clear-screen-in-python/)
@@ -153,6 +160,10 @@ while True:
         elif user_option == "2":
             decrypt_file()
         elif user_option == "3":
+            encrypt_string()
+        elif user_option == "4":
+            decrypt_string()
+        elif uuser_option == "3":
             encrypt_string()
         elif user_option == "4":
             decrypt_string()
