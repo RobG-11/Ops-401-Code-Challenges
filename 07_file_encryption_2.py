@@ -1,4 +1,4 @@
-# Script: 07 - File Encryption (Part II)
+# Script: 07 - File Encryption (Part II) - NOT COMPLETE
 # Author: Robert Gregor
 # Date of latest revision: 25 APR 23
 
