@@ -76,47 +76,34 @@ def compress_file(encrypt_file):
         # Print comformation of compression
         print(f"\nYou have successfully compressed and archived {encrypt_file}")
 
-def encrypt_file():
+def encrypt_file(file_path):
     # Load encryption key
     key = load_key()
     # Create Fernet object with loaded key
     f = Fernet(key)    
-    # Get filename to encrypt
-    encrypt_file = input("Enter path to filename to encrypt: ")    
+ 
     # Read file content as binary
-    with open(encrypt_file, "rb") as file:
+    with open(file_path, "rb") as file:
         file_data = file.read()        
     # Encrypt file content
     encrypted_file = f.encrypt(file_data)    
     # Write encrypted content to file
-    with open(encrypt_file, "wb") as file:
+    with open(file_path, "wb") as file:
         file.write(encrypted_file)
 
-    # Request if user would like to compress output file to an archive
-    archive_file = input(f"\nWould you like to compress {encrypt_file} to an archive (Y/N)?: ")
-
-    # Conditional determines if user would like compression, if so compress_file() funtion is executed with selected file as arguement
-    if archive_file == "Y":
-        compress_file(encrypt_file)
-    elif archive_file == "N":
-        pass
-    else:
-        print("\nInvalid input please try again!")
-        
-def decrypt_file():
+def decrypt_file(file_path):
     # Load decryption key
     key = load_key()
     # Create Fernet object with loaded key
     f = Fernet(key)    
-    # Get filename to decrypt
-    decrypt_file = input("Enter path to filename to decrypt: ")    
+
     # Read file content as binary
-    with open(decrypt_file, "rb") as file:
+    with open(file_path, "rb") as file:
         encrypted_data = file.read()        
     # Decrypt file content
     decrypted_data = f.decrypt(encrypted_data)    
     # Write decrypted content to file
-    with open(decrypt_file, "wb") as file:
+    with open(file_path, "wb") as file:
         file.write(decrypted_data)
 
 def encrypt_string():
@@ -144,10 +131,40 @@ def decrypt_string():
     print("\nDecrypted message: ", decrypted_string.decode())
 
 def encrypt_folder():
-    exit
+    # Load the key
+    key = load_key()
+    # Create Fernet object with loaded key
+    f = Fernet(key)
+    # Accept user input and assign folder_path variable
+    folder_path = input("\nEnter path to folder to encrypt: ")
+    # For loop iterates through all dirs & files in folder_path
+    for root, dirs, files in os.walk(folder_path):
+        # Iterate through each file provided by os.walk function
+        for file in files:
+            # Concatanate root dir and file to create file_path
+            file_path = os.path.join(root, file)
+            # Execute encrypt_file function with file_path arguement
+            encrypt_file(file_path)
+    # Print success to screen
+    print(f"\nYou have successfully encrpyted the {folder_path} folder!")
 
 def decrypt_folder():
-    exit
+    # Load the key
+    key = load_key()
+    # Create Fernet object with loaded key
+    f = Fernet(key)
+    # Accept user input and assign folder_path variable
+    folder_path = input("\nEnter path to folder to decrypt: ")
+    # For loop iterates through all dirs & files in folder_path
+    for root, dirs, files in os.walk(folder_path):
+        # Iterate through each file provided by os.walk function
+        for file in files:
+            # Concatanate root dir and file to create file_path
+            file_path = os.path.join(root, file)
+            # Execute decrypt_file function with file_path arguement
+            decrypt_file(file_path)
+    # Print success to screen
+    print(f"\nYou have successfully decrpyted the {folder_path} folder!")
 
 # Execute write_key() function
 write_key()
@@ -167,9 +184,11 @@ while True:
         user_option = str(input("------------------------\n"))
 
         if user_option == "1":
-            encrypt_file()
+            file_path = input("Enter path to filename to encrypt: ")
+            encrypt_file(file_path)
         elif user_option == "2":
-            decrypt_file()
+            file_path = input("Enter path to filename to decrypt: ")
+            decrypt_file(file_path)
         elif user_option == "3":
             encrypt_string()
         elif user_option == "4":
