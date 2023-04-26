@@ -144,42 +144,7 @@ def decrypt_string():
     print("\nDecrypted message: ", decrypted_string.decode())
 
 def encrypt_folder():
-    # Load decryption key
-    key = load_key()
-    # Create Fernet object with loaded key
-    f = Fernet(key)
-    # Get folder path to encrypt
-    folder_path = input("\nEnter path to folder to encrypt: ")
-    
-    # Compress Folder - Strips path from folder_path and set folder_name equal to target folder
-    folder_name = os.path.basename(folder_path)
-    # Appends .zip to folder_name
-    compressed_folder_path = folder_name + '.zip'
-    # Creates new zip file with ZIP_DEFLATED compression method and the highest compression level (9)
-    with zipfile.ZipFile(compressed_folder_path, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
-        # Iterates over all items in folder_path with os.walk() function
-        for root, _, files in os.walk(folder_path):
-            # Iterates over all files in files list
-            for file in files:
-                # Creates full file path by joining root and file with os.path.join() function
-                file_path = os.path.join(root, file)
-                # Creats realtive path of file with os.path.relpath() function
-                arcname = os.path.relpath(file_path, folder_path)
-                # Write file to arcname
-                archive.write(file_path, arcname=arcname)
-
-    # Encrypt folder - Open compressed folder in binary read mode
-    with open(compressed_folder_path, "rb") as file:
-        # Assigns contents of open file to variable
-        file_data = file.read()
-    # Encrypts file_data and assigns contents to variable
-    encrypted_file = f.encrypt(file_data)
-    # Opens compressed folder in binary write mode
-    with open(compressed_folder_path, "wb") as file:
-        # Writes encrypted data to open file
-        file.write(encrypted_file)
-
-    print(f"\nYou have successfully encrypted folder {folder_path}")
+    exit
 
 def decrypt_folder():
     exit
