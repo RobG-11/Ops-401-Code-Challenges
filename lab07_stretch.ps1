@@ -18,14 +18,15 @@ Write-Host "Below are the available drives on your computer"
 Write-Host ""
 Get-PSDrive
 Write-Host ""
-$user_drive = Read-Host "Please enter the letter of the drive you would like to encrypt: "
+$user_drive = Read-Host "Please enter the letter of the drive you would like to encrypt (ex C:) "
 Write-Host ""
-$user_pass = Read-Host -AsSecureString "Please provide a secure password: "
+$user_pass = Read-Host -AsSecureString "Please provide a secure password "
 Write-Host ""
 # Enables bitlocker for user_drive with user_pass
-Enable-BitLockerKeyProtector $user_drive + ':' -PasswordProtector -Password $user_pass
+Enable-BitLocker $user_drive
+Enable-BitLockerKeyProtector $user_drive -PasswordProtector -Password $user_pass
 Write-Host "You have successfully enabled bitlocker, your computer will now reboot and encrypt the drive to complete the process"
 Write-Host ""
-Read-Host "Please press ENTER to reboot: "
+Read-Host "Please press ENTER to reboot "
 Restart-Computer -Force
 
