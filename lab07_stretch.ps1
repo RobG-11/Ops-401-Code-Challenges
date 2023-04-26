@@ -8,7 +8,6 @@
 
 # My Sources:
     # [BitLocker: Use BitLocker Drive Encryption Tools to manage BitLocker](https://learn.microsoft.com/en-us/windows/security/information-protection/bitlocker/bitlocker-use-bitlocker-drive-encryption-tools-to-manage-bitlocker)
-    # []()
 
 # Main
 
@@ -33,3 +32,4 @@ Write-Host ""
 Read-Host "Please press ENTER to reboot"
 Restart-Computer -Force
 
+# End
