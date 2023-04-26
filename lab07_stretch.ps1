@@ -12,7 +12,7 @@
 
 # Main
 
-# Enables bitlocker for C: drive
+
 Write-Host ""
 Write-Host "Below are the available drives on your computer"
 Write-Host ""
@@ -22,6 +22,7 @@ $user_drive = Read-Host "Please enter the letter of the drive you would like to 
 Write-Host ""
 $user_pass = Read-Host -AsSecureString "Please provide a secure password: "
 Write-Host ""
+# Enables bitlocker for user_drive with user_pass
 Enable-BitLockerKeyProtector $user_drive + ':' -PasswordProtector -Password $user_pass
 Write-Host "You have successfully enabled bitlocker, your computer will now reboot and encrypt the drive to complete the process"
 Write-Host ""
