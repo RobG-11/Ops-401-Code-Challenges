@@ -173,6 +173,12 @@ def decrypt_folder():
     # Print success to screen
     print(f"\nYou have successfully decrpyted the {folder_path} folder!")
 
+def alter_wall():
+    exit
+
+def pop_up():
+    exit
+
 # Execute write_key() function
 write_key()
 
@@ -204,6 +210,10 @@ while True:
             encrypt_folder()
         elif user_option == "6":
             decrypt_folder()
+        elif user_option == "7":
+            alter_wall()
+        elif user_option == "8":
+            pop_up()
         elif user_option == "exit":
             print("\nExited successfully!\n")
             exit()
