@@ -193,7 +193,7 @@ while True:
         print("\n------------------------")
         print("Please choose an option:")
         print("------------------------")
-        print("1) Encrypt file\n2) Decrypt file\n3) Encrypt message string\n4) Decrypt message string\n5) Encrypt folder\n6) Decrypt folder\nexit) exit program")
+        print("1) Encrypt file\n2) Decrypt file\n3) Encrypt message string\n4) Decrypt message string\n5) Encrypt folder\n6) Decrypt folder\n7) Ransom Simulation\nexit) exit program")
         user_option = str(input("------------------------\n"))
 
         if user_option == "1":
