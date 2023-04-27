@@ -1,4 +1,4 @@
-# Script: 0* - File Encryption (Part III) - INCOMPLETE
+# Script: 08 - File Encryption (Part III) - INCOMPLETE
 # Author: Robert Gregor
 # Date of latest revision: 26 APR 23
 
