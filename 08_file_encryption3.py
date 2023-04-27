@@ -62,6 +62,9 @@
 import os
 import zipfile
 from cryptography.fernet import Fernet
+import ctypes
+import tempfile
+import urllib.request
 
 def write_key():
     # Generate key and store in key variable
@@ -173,10 +176,7 @@ def decrypt_folder():
     # Print success to screen
     print(f"\nYou have successfully decrpyted the {folder_path} folder!")
 
-def alter_wall():
-    exit
-
-def pop_up():
+def ransom_sim():
     exit
 
 # Execute write_key() function
@@ -211,9 +211,7 @@ while True:
         elif user_option == "6":
             decrypt_folder()
         elif user_option == "7":
-            alter_wall()
-        elif user_option == "8":
-            pop_up()
+            ransom_sim()
         elif user_option == "exit":
             print("\nExited successfully!\n")
             exit()
