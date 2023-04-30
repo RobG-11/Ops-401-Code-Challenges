@@ -55,6 +55,9 @@
     # [os.path — Common pathname manipulations](https://docs.python.org/3/library/os.path.html)
     # [Python os.walk() Method](https://www.tutorialspoint.com/python/os_walk.htm)
     # [os.path — Common pathname manipulations](https://docs.python.org/3/library/os.path.html)
+    # [ctypes — A foreign function library for Python](https://docs.python.org/3/library/ctypes.html)
+    # [tempfile — Generate temporary files and directories](https://docs.python.org/3/library/tempfile.html)
+    # [urllib.request — Extensible library for opening URLs](https://docs.python.org/3/library/urllib.request.html)
 
 #!/usr/bin/env python3
 
