@@ -23,3 +23,20 @@
 import sys
 from scapy.all import srl,IP,ICMP
 
+def scan_ports():
+        
+        exit
+
+while True:
+      
+        print("\n----------------------------")
+        print("Welcome to tcp_port_scanner!")
+        print("----------------------------")
+
+        host_ip = input("\nPlease enter the IP of the host you would like to scan")
+
+        port_range = input("\nPlease enter the port range you would like to scan (ex 100-200)")
+
+        scan_ports()
+
+# End
