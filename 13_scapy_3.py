@@ -1,6 +1,6 @@
-# Script: 12 - Scapy (Part II) - INCOMPLETE
+# Script: 13 - Scapy (Part III) - INCOMPLETE
 # Author: Robert Gregor
-# Date of latest revision: 02 MAY 23
+# Date of latest revision: 03 MAY 23
 
 # Objectives (PART I)
     # In Python, create a TCP Port Range Scanner that tests whether a TCP port is open or closed. The script must:
@@ -10,6 +10,7 @@
                 # Notify the user the port is open.
             # If flag 0x14 received, notify user the port is closed.
             # If no flag is received, notify the user the port is filtered and silently dropped.
+
 # Objectives (PART II)
     # Add the following features to your Network Security Tool:
         # User menu prompting choice between TCP Port Range Scanner mode and ICMP Ping Sweep mode
@@ -23,13 +24,27 @@
             # Otherwise, inform the user that the host is responding
         # Count how many hosts are online and inform the user
 
+# Objectives (PART III)
+    # Ping an IP address determined by the user
+        # If the host exists, scan its ports and determine if any are open
+    # Here’s a general outline of how to achieve the desired outcome
+        # In Python, combine the two modes (port and ping) of your network scanner script.
+        # Eliminate the choice of mode selection.
+        # Continue to prompt the user for an IP address to target.
+        # Move port scan to its own function.
+        # Call the port scan function if the host is responsive to ICMP echo requests.
+        # Print the output to the screen.
 
 # Code Fellows Sources:
     # [Welcome to Scapy’s documentation!](https://scapy.readthedocs.io/en/latest/index.html)
     # [About Scapy](https://scapy.readthedocs.io/en/latest/introduction.html#)
     # [Build your own tools](https://scapy.readthedocs.io/en/latest/extending.html)
+
 # Code Fellows Sources (PART II):
     # [Generating a Range of IP Addresses from a CIDR Address in Python] - BAD LINK
+
+# Code Fellows Sources (PART III):
+    # 
 
 # My Sources (PART I):
     # [Port scanning using Scapy](https://resources.infosecinstitute.com/topic/port-scanning-using-scapy/)
@@ -42,6 +57,9 @@
     # [Guide on the Python Map Function](https://www.bitdegree.org/learn/python-map)
 
 # My Sources (PART II)
+    # 
+
+# My Sources (PART III)
     # 
 
 #! /usr/bin/env python
