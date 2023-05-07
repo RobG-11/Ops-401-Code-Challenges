@@ -68,8 +68,8 @@ while True:
     print("--------------------------------")
 
     # Sets variable based on user input
-    host_name = input("\nPlease enter the host name you would like to scan (ex. scanme.nmap.org)")
-    port_range_input = input("\nPlease enter the port range you would like to scan (ex. (100, 200)")
+    host_name = input("\nPlease enter the host name you would like to scan (ex. scanme.nmap.org): ")
+    port_range_input = input("\nPlease enter the port range you would like to scan (ex. (100, 200): ")
 
     # Converts user input into integer tuple
     port_range = tuple(map(int, port_range_input.split(', ')))

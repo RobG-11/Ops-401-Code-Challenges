@@ -44,7 +44,7 @@
     # [Generating a Range of IP Addresses from a CIDR Address in Python] - BAD LINK
 
 # Code Fellows Sources (PART III):
-    # 
+    # No new sources
 
 # My Sources (PART I):
     # [Port scanning using Scapy](https://resources.infosecinstitute.com/topic/port-scanning-using-scapy/)
@@ -57,23 +57,26 @@
     # [Guide on the Python Map Function](https://www.bitdegree.org/learn/python-map)
 
 # My Sources (PART II)
-    # 
+    # [ipaddress — IPv4/IPv6 manipulation library](https://docs.python.org/3/library/ipaddress.html)
+    # [How to Manipulate IP Addresses in Python using ipaddress Module?](https://www.geeksforgeeks.org/how-to-manipulate-ip-addresses-in-python-using-ipaddress-module/)
+    # [Python list()](https://www.programiz.com/python-programming/methods/built-in/list)
+    # [Scapy Port Scanner - Set verbose mode in command line](https://stackoverflow.com/questions/68148179/scapy-port-scanner-set-verbose-mode-in-command-line)
 
 # My Sources (PART III)
-    # 
+    # No new sources
 
-#! /usr/bin/env python
+#!/usr/bin/env python
 
 # Import libraries
 import sys
-from scapy.all import IP, TCP, sr1, send
+import ipaddress
+from scapy.all import IP, TCP, sr1, send, ICMP
 
 # Declares scan_ports function with two user supplied arguements
-def scan_ports(host_name, port_range):
+def scan_ports(user_IP):
 
     # Sets variables based on user input
-    host_name = input("\nPlease enter the host name you would like to scan (ex. scanme.nmap.org)")
-    port_range_input = input("\nPlease enter the port range you would like to scan (ex. (100, 200)")
+    port_range_input = input("Please enter the port range you would like to scan (ex. (100, 200): ")
 
     # Converts user input into integer tuple
     port_range = tuple(map(int, port_range_input.split(', ')))
@@ -82,7 +85,7 @@ def scan_ports(host_name, port_range):
     for port in range(port_range[0], port_range[1] + 1):
 
         # Sets host_name as IP destination, creates TCP packet, sets destination port, and sets SYN flag
-        packet = IP(dst=host_name) / TCP(dport=port, flags="S")
+        packet = IP(dst=user_IP) / TCP(dport=port, flags="S")
 
         # Sends created packet and waits for reponse
         response = sr1(packet, timeout=1, verbose=0)
@@ -98,7 +101,7 @@ def scan_ports(host_name, port_range):
             if response[TCP].flags == 0x12:
 
                 # Creates and sends packet with RST flag set to close connection
-                send_rst = IP(dst=host_name) / TCP(dport=port, flags="R")
+                send_rst = IP(dst=user_IP) / TCP(dport=port, flags="R")
                 send(send_rst, verbose=0)
 
                 # Informs user of open port
@@ -112,26 +115,33 @@ def scan_ports(host_name, port_range):
             # Informs user of an unexpected response
             print(f"Port {port} provided an unexpected response")
 
-def icmp_ping_sweep():
-    exit()
+def icmp_ping_sweep(user_IP):
+
+    # Prints current host being pinged
+    print("\nPinging", user_IP, "- please wait...")
+    # Calls sr1 function to send single packet and store response in response variable
+    response = sr1(
+        # Sets destination address for packet
+        IP(dst=user_IP)/ICMP(),
+        # Set timeout for receiving a response
+        timeout=2,
+        # Sets verbosity to no output
+        verbose=0
+    )
+
+    # Conditional provide output to terminal based on response variable 
+    if response is None:
+        print(f"{user_IP} is down (unresponsive)")
+    # Checks if response is ICMP type is 3 AND ICMP code is either 1, 2, 3, 9, 10, or 13
+    elif response.haslayer(ICMP) and response.getlayer(ICMP).type == 3 and response.getlayer(ICMP).code in [1, 2, 3, 9, 10, 13]:
+        print(f"{user_IP} is blocking ICMP traffic")
+    else:
+        print(f"{user_IP} is up (responsive)\n")
+        scan_ports(user_IP)
 
 while True:
       
-    print("\n------------------------")
-    print("Please choose an option:")
-    print("------------------------")
-    print("1) Automated Port Scanner\n2) ICMP Ping Sweep\nexit) exit program")
-    user_option = str(input("------------------------\n"))
-
-    if user_option == "1":
-        scan_ports()
-    elif user_option == "2":
-        icmp_ping_sweep()
-    elif user_option == "exit":
-        print("\nExited successfully!\n")
-        exit()
-    else:
-        print("\nInvalid input please try again!")
-        continue
+    user_IP = str(input("\nPlease enter an IP to scan: "))
+    icmp_ping_sweep(user_IP)
 
 # End

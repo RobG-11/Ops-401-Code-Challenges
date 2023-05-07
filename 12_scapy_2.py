@@ -40,22 +40,27 @@
     # [tuple() Function in Python](https://scapy.readthedocs.io/en/latest/usage.html)
     # [Python String split() Method](https://www.tutorialsteacher.com/python/string-split)
     # [Guide on the Python Map Function](https://www.bitdegree.org/learn/python-map)
+    # Chat GPT - assisted with syntax for integer tuple
 
 # My Sources (PART II)
-    # 
+    # [ipaddress — IPv4/IPv6 manipulation library](https://docs.python.org/3/library/ipaddress.html)
+    # [How to Manipulate IP Addresses in Python using ipaddress Module?](https://www.geeksforgeeks.org/how-to-manipulate-ip-addresses-in-python-using-ipaddress-module/)
+    # [Python list()](https://www.programiz.com/python-programming/methods/built-in/list)
+    # [Scapy Port Scanner - Set verbose mode in command line](https://stackoverflow.com/questions/68148179/scapy-port-scanner-set-verbose-mode-in-command-line)
 
-#! /usr/bin/env python
+#!/usr/bin/env python
 
 # Import libraries
 import sys
-from scapy.all import IP, TCP, sr1, send
+import ipaddress
+from scapy.all import IP, TCP, sr1, send, ICMP
 
 # Declares scan_ports function with two user supplied arguements
-def scan_ports(host_name, port_range):
+def scan_ports():
 
     # Sets variables based on user input
-    host_name = input("\nPlease enter the host name you would like to scan (ex. scanme.nmap.org)")
-    port_range_input = input("\nPlease enter the port range you would like to scan (ex. (100, 200)")
+    host_name = input("\nPlease enter the host name you would like to scan (ex. scanme.nmap.org): ")
+    port_range_input = input("\nPlease enter the port range you would like to scan (ex. (100, 200): ")
 
     # Converts user input into integer tuple
     port_range = tuple(map(int, port_range_input.split(', ')))
@@ -95,7 +100,34 @@ def scan_ports(host_name, port_range):
             print(f"Port {port} provided an unexpected response")
 
 def icmp_ping_sweep():
-    exit()
+    # Sets cidr_block variable based on user input
+    cidr_block = input("\nPlease enter a CIDR block (ex. 192.168.1.0/24): ")
+
+    # Creates list of all addresses in CIDR block
+    ip_list = list(ipaddress.IPv4Network(cidr_block).hosts())
+
+    # For loop iterates through each item in ip_list
+    for host in ip_list:
+        # Prints current host being pinged
+        print("\nPinging", str(host), "- please wait...")
+        # Calls sr1 function to send single packet and store response in response variable
+        response = sr1(
+            # Sets destination address for packet
+            IP(dst=str(host))/ICMP(),
+            # Set timeout for receiving a response
+            timeout=2,
+            # Sets verbosity to no output
+            verbose=0
+        )
+
+        # Conditional provide output to terminal based on response variable 
+        if response is None:
+            print(f"{host} is down (unresponsive)")
+        # Checks if response is ICMP type is 3 AND ICMP code is either 1, 2, 3, 9, 10, or 13
+        elif response.haslayer(ICMP) and response.getlayer(ICMP).type == 3 and response.getlayer(ICMP).code in [1, 2, 3, 9, 10, 13]:
+            print(f"{host} is blocking ICMP traffic")
+        else:
+            print(f"{host} is up (responsive)")
 
 while True:
       
