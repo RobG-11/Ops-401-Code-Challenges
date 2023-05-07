@@ -1,4 +1,4 @@
-# Script: 13 - Scapy (Part III) - INCOMPLETE
+# Script: 13 - Scapy (Part III)
 # Author: Robert Gregor
 # Date of latest revision: 03 MAY 23
 
