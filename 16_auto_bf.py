@@ -38,7 +38,7 @@
 #!/usr/bin/env python
 
 # Import libraries
-import time, getpass
+import time, getpass, os
 
 def wordlist_iterate():
     # Accepts user input path to wordlist
@@ -60,7 +60,18 @@ def wordlist_iterate():
                 print(variable)
                 
 def recog_passwd():
-    exit()
+    word_list = str(input("\nPlease enter the path to your word list (ex. /home/user/wordlist.txt)):\n"))
+    user_passwd = str(input("\nPlease enter the password you would like to query:\n"))
+
+    if os.path.isfile(word_list):
+        with open(word_list, 'r') as file:
+            for line in file:
+                passwords = line.strip().split()
+                if user_passwd in passwords:
+                    print(f"\nPassword '{user_passwd}' was found in the {word_list} word list")
+                    break
+            else:
+                print(f"\nPassword '{user_passwd}' was not found in the {word_list} word list")
 
 def complex_passwd():
     exit()
