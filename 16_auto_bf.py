@@ -31,8 +31,8 @@
 
 # My Sources:
     # [With Open in Python – With Statement Syntax Example](https://www.freecodecamp.org/news/with-open-in-python-with-statement-syntax-example/)
-    # []()
-    # []()
+    # [Python | os.path.isfile() method](https://www.geeksforgeeks.org/python-os-path-isfile-method/)
+    # [os.path — Common pathname manipulations](https://docs.python.org/3/library/os.path.html)
     # []()
 
 #!/usr/bin/env python
@@ -47,7 +47,7 @@ def wordlist_iterate():
     with open(word_list, 'r') as file:
         # For loop iterates through each line in word_list
         for line in file:
-            # Rmoves leading and trailing white space, breaks line into list of words
+            # Removes leading and trailing white space, breaks line into list of words
             passwords = line.strip().split()
             # For loop iterates through each password in passwords list
             for password in passwords:
@@ -60,13 +60,18 @@ def wordlist_iterate():
                 print(variable)
                 
 def recog_passwd():
+    # Accepts user input for word list and password to query
     word_list = str(input("\nPlease enter the path to your word list (ex. /home/user/wordlist.txt)):\n"))
     user_passwd = str(input("\nPlease enter the password you would like to query:\n"))
-
+    # Conditional determines if word list file exists
     if os.path.isfile(word_list):
+        # With statement opens word_list file in read mode as file
         with open(word_list, 'r') as file:
+            # For loop iterates through each line in word_list
             for line in file:
+                # Removes leading and trailing white space, breaks line into list of words 
                 passwords = line.strip().split()
+                # Conditional determines if user_password is in user provided word list
                 if user_passwd in passwords:
                     print(f"\nPassword '{user_passwd}' was found in the {word_list} word list")
                     break
