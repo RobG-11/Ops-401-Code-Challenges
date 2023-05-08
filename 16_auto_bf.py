@@ -90,33 +90,33 @@ def complex_passwd():
 
     # Conditional uses len function to determine if password length meets requirements
     if len(user_passwd) >= min_length:
-        print("Password length requirement: Satisfied")
+        print("\nPassword length: Satisfied")
     else:
-        print(f"Password length requirement: Not satisfied (minimum {min_length} characters)")
+        print(f"Password length: Not satisfied (minimum {min_length} characters)")
 
     # re.findall function counts how many capital letters are found in user_passwd
     capital_letters = re.findall(r'[A-Z]', user_passwd)
     # Conditional used to determine if number of capital letters used meets requirements
     if len(capital_letters) >= min_capital_letters:
-        print("Capital letter requirement: Satisfied")
+        print(f"Minimum of {min_capital_letters} capital letters: Satisfied")
     else:
-        print(f"Capital letter requirement: Not satisfied (minimum {min_capital_letters} capital letters)")
+        print(f"Minimum of {min_capital_letters} capital letters: Not satisfied")
 
     # re.findall function counts how many numbers are found in user_passwd
     numbers = re.findall(r'\d', user_passwd)
     # Conditional used to determine if number of numbers used meets requirements
     if len(numbers) >= min_numbers:
-        print("Number requirement: Satisfied")
+        print(f"Minimum of {min_numbers} numbers: Satisfied")
     else:
-        print(f"Number requirement: Not satisfied (minimum {min_numbers} numbers)")
+        print(f"Minimum of {min_numbers} numbers: Not satisfied")
 
     # re.findall function counts how many specified special characters are found in user_passwd
     special_characters = re.findall(r'[!@#$%^&*(),.?":{}|<>]', user_passwd)
     # Conditional used to determine if number of special characters used meets requirements
     if len(special_characters) >= min_special_characters:
-        print("Special character requirement: Satisfied")
+        print(f"Minimum of {min_special_characters} special characters: Satisfied")
     else:
-        print(f"Special character requirement: Not satisfied (minimum {min_special_characters} special characters)")
+        print(f"Minimum of {min_special_characters} special characters: Not satisfied")
 
     # Conditional determines if all requirements are met using boolean logic
     if (len(user_passwd) >= min_length and
