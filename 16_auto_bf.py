@@ -33,12 +33,14 @@
     # [With Open in Python – With Statement Syntax Example](https://www.freecodecamp.org/news/with-open-in-python-with-statement-syntax-example/)
     # [Python | os.path.isfile() method](https://www.geeksforgeeks.org/python-os-path-isfile-method/)
     # [os.path — Common pathname manipulations](https://docs.python.org/3/library/os.path.html)
-    # []()
+    # [re.findall()](https://www.codecademy.com/resources/docs/python/regex/findall)
+    # [Python Regex: re.search() VS re.findall()](https://www.geeksforgeeks.org/python-regex-re-search-vs-re-findall/)
+    # 
 
 #!/usr/bin/env python
 
 # Import libraries
-import time, getpass, os
+import time, getpass, os, re
 
 def wordlist_iterate():
     # Accepts user input path to wordlist
@@ -79,7 +81,49 @@ def recog_passwd():
                 print(f"\nPassword '{user_passwd}' was not found in the {word_list} word list")
 
 def complex_passwd():
-    exit()
+    user_passwd = str(input("\nPlease enter the password you would like to verify meets complexity requirements:\n"))
+    # Declare variables for password requirements
+    min_length = 8
+    min_capital_letters = 2
+    min_numbers = 2
+    min_special_characters = 2
+
+    # Conditional uses len function to determine if password length meets requirements
+    if len(user_passwd) >= min_length:
+        print("Password length requirement: Satisfied")
+    else:
+        print(f"Password length requirement: Not satisfied (minimum {min_length} characters)")
+
+    # re.findall function counts how many capital letters are found in user_passwd
+    capital_letters = re.findall(r'[A-Z]', user_passwd)
+    # Conditional used to determine if number of capital letters used meets requirements
+    if len(capital_letters) >= min_capital_letters:
+        print("Capital letter requirement: Satisfied")
+    else:
+        print(f"Capital letter requirement: Not satisfied (minimum {min_capital_letters} capital letters)")
+
+    # re.findall function counts how many numbers are found in user_passwd
+    numbers = re.findall(r'\d', user_passwd)
+    # Conditional used to determine if number of numbers used meets requirements
+    if len(numbers) >= min_numbers:
+        print("Number requirement: Satisfied")
+    else:
+        print(f"Number requirement: Not satisfied (minimum {min_numbers} numbers)")
+
+    # re.findall function counts how many specified special characters are found in user_passwd
+    special_characters = re.findall(r'[!@#$%^&*(),.?":{}|<>]', user_passwd)
+    # Conditional used to determine if number of special characters used meets requirements
+    if len(special_characters) >= min_special_characters:
+        print("Special character requirement: Satisfied")
+    else:
+        print(f"Special character requirement: Not satisfied (minimum {min_special_characters} special characters)")
+
+    # Conditional determines if all requirements are met using boolean logic
+    if (len(user_passwd) >= min_length and
+        len(capital_letters) >= min_capital_letters and
+        len(numbers) >= min_numbers and
+        len(special_characters) >= min_special_characters):
+        print("\nSUCCESS! YOU HAVE MET PASSWORD COMPLEXITY REQUIREMENTS!")
 
 while True:
       
