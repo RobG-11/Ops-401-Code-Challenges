@@ -45,7 +45,8 @@
     # [re.findall()](https://www.codecademy.com/resources/docs/python/regex/findall)
     # [Python Regex: re.search() VS re.findall()](https://www.geeksforgeeks.org/python-regex-re-search-vs-re-findall/)
 # My Sources (PART II):
-    # 
+    # [Welcome to Paramiko!](https://www.paramiko.org/)
+    # [Use Paramiko and Python to SSH into a Server](https://www.linode.com/docs/guides/use-paramiko-python-to-ssh-into-a-server/)
 
 #!/usr/bin/env python
 
