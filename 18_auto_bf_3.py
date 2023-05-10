@@ -59,8 +59,11 @@
     # [Welcome to Paramiko!](https://www.paramiko.org/)
     # [Use Paramiko and Python to SSH into a Server](https://www.linode.com/docs/guides/use-paramiko-python-to-ssh-into-a-server/)
 # My Sources (PART II):
-    #
-
+    # [Errors and Exceptions](https://docs.python.org/3/tutorial/errors.html)
+    # [Built-in Exceptions](https://docs.python.org/3/library/exceptions.html)
+    # [3.6. Runtime Errors](https://runestone.academy/ns/books/published/fopp/Debugging/RuntimeErrors.html)
+    # [Python zipfile.extract() doesn't extract all files](https://stackoverflow.com/questions/19483775/python-zipfile-extract-doesnt-extract-all-files)
+    # [Python Zipfile Module](https://www.pythoncheatsheet.org/modules/zipfile-module)
 #!/usr/bin/env python
 
 # Import libraries
