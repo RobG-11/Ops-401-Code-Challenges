@@ -1,6 +1,6 @@
-# Script: 17 - Automated Brute Force Wordlist Attack Tool Part 2 of 3
+# Script: 18 - Automated Brute Force Wordlist Attack Tool Part 3 of 3
 # Author: Robert Gregor
-# Date of latest revision: 09 MAY 23
+# Date of latest revision: 10 MAY 23
 
 # Objectives (PART I)
     # In Python, create a script that prompts the user to select one of the following modes:
@@ -30,6 +30,14 @@
             # Assume the username and IP are known inputs
             # Attempt each word on the provided word list until successful login takes place
         # Dump user credential hashes of victim system and print to screen (STRETCH GOAL)
+# Objectives (PART III)
+    # First, setup your target ZIP file
+        # Follow the guide in link below to archive a .txt file with password protection
+        # [How to Protect Zip file with Password on Ubuntu](https://www.howtoforge.com/how-to-protect-zip-file-with-password-on-ubuntu-1804/)
+    # Add a new mode to your Python brute force tool
+        # Allows you to brute force attack a password-locked zip file
+        # Use the zipfile library
+        # Pass it RockYou.txt list to test all words in list against password-locked zip file
 
 # Code Fellows Sources (PART I):
     # [Iterate over a set in Python](https://www.geeksforgeeks.org/iterate-over-a-set-in-python/)
@@ -37,6 +45,9 @@
 # Code Fellows Sources (PART II):
     # [How to Make an SSH Brute-Forcer in Python](https://null-byte.wonderhowto.com/how-to/sploit-make-ssh-brute-forcer-python-0161689/)
     # [How to Execute Shell Commands in a Remote Machine using Python](https://www.geeksforgeeks.org/how-to-execute-shell-commands-in-a-remote-machine-using-python-paramiko/)
+# Code Fellows Sources (PART III):
+    # [zipfile — Work with ZIP archives](https://docs.python.org/3/library/zipfile.html#module-zipfile)
+
 
 # My Sources (PART I):
     # [With Open in Python – With Statement Syntax Example](https://www.freecodecamp.org/news/with-open-in-python-with-statement-syntax-example/)
@@ -47,12 +58,15 @@
 # My Sources (PART II):
     # [Welcome to Paramiko!](https://www.paramiko.org/)
     # [Use Paramiko and Python to SSH into a Server](https://www.linode.com/docs/guides/use-paramiko-python-to-ssh-into-a-server/)
+# My Sources (PART II):
+    #
 
 #!/usr/bin/env python
 
 # Import libraries
 import time, getpass, os, re
 import paramiko, hashlib
+from zipfile import ZipFile
 
 def wordlist_iterate():
     # Accepts user input path to wordlist
@@ -203,15 +217,37 @@ def ssh_auth():
             # Notify user password not found in word list
             print("Apologies, couldn't crack password.")
 
-def dump_hashes():
-    exit()
+def bf_zipfile():
+    # Requests user input for zip_file and word_list locations
+    zip_file = input("\nPlease enter path to zip file you would like to Brute Force: ")
+    word_list = input("Please enter path to wordlist file: \n")
+    # Opens user selected word_list in read mode
+    with open(word_list, 'r') as file:
+        # Read contents of file into string then splits into list
+        passwd_list = file.read().splitlines()
+    # For loop iterates through each password in passwd_list
+    for password in passwd_list:
+        try:
+            # Opens zip_file
+            with ZipFile(zip_file) as zf:
+                # Attempts to extract files using current password in list
+                zf.extractall(pwd=bytes(password,'utf-8'))
+            # Prints if password found
+            print(f"Password found: {password}")
+            # Ends function if correct password is found
+            return
+        # Catches RuntimeError generated with incorrect password
+        except RuntimeError:
+            pass
+    # Prints if password not found
+    print("Apologies, password not found")
 
 while True:
       
         print("\n------------------------")
         print("Please choose an option:")
         print("------------------------")
-        print("1) List all passwords in word list\n2) Password in word list?\n3) Password complexity evaluation\n4) Brute force SSH access\n5) Dump system hashes\nexit) Exits program")
+        print("1) List all passwords in word list\n2) Password in word list?\n3) Password complexity evaluation\n4) Brute force SSH access\n5) Brute force password locked zip file\nexit) Exits program")
         user_option = str(input("------------------------\n"))
 
         if user_option == "1":
@@ -223,7 +259,7 @@ while True:
         elif user_option == "4":
             ssh_auth()
         elif user_option == "5":
-            dump_hashes()
+            bf_zipfile()
         elif user_option == "exit":
             print("\nExited successfully!\n")
             exit()
