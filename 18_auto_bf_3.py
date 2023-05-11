@@ -237,7 +237,6 @@ def bf_zipfile():
             print(f"Password found: {password}")
             # Ends function if correct password is found
             return
-        # Catches RuntimeError generated with incorrect password
         except:
             print("Apologies, password not found")
 
