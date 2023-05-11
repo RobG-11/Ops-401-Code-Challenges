@@ -238,7 +238,8 @@ def bf_zipfile():
             # Ends function if correct password is found
             return
         except:
-            print("Apologies, password not found")
+            print(f"Apologies, {password} password not found\n")
+            time.sleep(1)
 
 while True:
       
