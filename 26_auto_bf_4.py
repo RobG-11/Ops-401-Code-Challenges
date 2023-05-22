@@ -1,4 +1,4 @@
-# Script: 26 - Automated Brute Force Wordlist Attack Tool Part 4 of 4
+# Script: 26 - Automated Brute Force Wordlist Attack Tool Part 4 of 4 - COMPLETED
 # Author: Robert Gregor
 # Date of latest revision: 22 MAY 23
 
@@ -91,10 +91,13 @@ from datetime import datetime
 log_file_time = datetime.now().strftime("log-%Y-%m-%d.txt")
 # Configure root logger (default), sets log filename and level of severity to be logged
 logging.basicConfig(filename=log_file_time, level=logging.INFO,
-                    # Sets log entry format (time, severity level, and user input)
-                    format='%(asctime)s - %(levelname)s - %(message)s',
-                    # Sets lof entry time stamp format
-                    datefmt='%Y-%m-%d %H:%M:%S %Z')
+    # Sets log entry format (time, severity level, and user input)
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    # Sets lof entry time stamp format
+    datefmt='%Y-%m-%d %H:%M:%S %Z')
+
+# Logs program execution time
+logging.info('Program Executed')
 
 def wordlist_iterate():   
     # Accepts user input path to wordlist
@@ -118,9 +121,9 @@ def wordlist_iterate():
                     print(variable)
     else:
         # Call logging.info function with invalid user word list as 2nd arguement
-            logging.info('Word list not found: %s', word_list)
-            # Print error to terminal
-            print("\nERROR - Word list not found, please try again!")
+        logging.info('Word list not found: %s', word_list)
+        # Print error to terminal
+        print("\nERROR - Word list not found, please try again!")
 
 ### PART IV Section II included in while loop at end of script ###
 
@@ -279,36 +282,37 @@ def bf_zipfile():
             print(f"Apologies, {password} password not found\n")
             time.sleep(1)
 
+############## PART IV Section II Begin ######################################
+
 while True:
       
-        print("\n------------------------")
-        print("Please choose an option:")
-        print("------------------------")
-        print("1) List all passwords in word list\n2) Password in word list?\n3) Password complexity evaluation\n4) Brute force SSH access\n5) Brute force password locked zip file\nexit) Exits program")
-        user_option = str(input("------------------------\n"))
+    print("\n------------------------")
+    print("Please choose an option:")
+    print("------------------------")
+    print("1) List all passwords in word list\n2) Password in word list?\n3) Password complexity evaluation\n4) Brute force SSH access\n5) Brute force password locked zip file\nexit) Exits program")
+    user_option = str(input("------------------------\n"))
 
-        if user_option == "1":
-            wordlist_iterate()
-        elif user_option == "2":
-            recog_passwd()
-        elif user_option == "3":
-            complex_passwd()
-        elif user_option == "4":
-            ssh_auth()
-        elif user_option == "5":
-            bf_zipfile()
-        elif user_option == "exit":
-            print("\nExited successfully!\n")
-            exit()
+    if user_option == "1":
+        wordlist_iterate()
+    elif user_option == "2":
+        recog_passwd()
+    elif user_option == "3":
+        complex_passwd()
+    elif user_option == "4":
+        ssh_auth()
+    elif user_option == "5":
+        bf_zipfile()
+    elif user_option == "exit":
+        logging.info('Program Exited')
+        print("\nExited successfully!\n")
+        exit()
+    
+    else:
+        # Call logging.info function with invalid user input as 2nd arguement
+        logging.info('Invalid Input Received: %s', user_option)
+        # Print error to terminal
+        print("\nERROR - Invalid input, please try again!")
+        continue
 
-        ############## PART IV Section II Begin ######################################
-        
-        else:
-            # Call logging.info function with invalid user input as 2nd arguement
-            logging.info('Invalid Input Received: %s', user_option)
-            # Print error to terminal
-            print("\nERROR - Invalid input, please try again!")
-            continue
-
-        ############## PART IV Section II End ######################################
+############## PART IV Section II End ######################################
 
