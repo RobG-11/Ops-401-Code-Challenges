@@ -1,0 +1,2 @@
+2023-05-23 21:29:47 UTC - INFO - Invalid Input Received: ewgwergwer
+2023-05-23 21:30:13 UTC - INFO - Program Exited
