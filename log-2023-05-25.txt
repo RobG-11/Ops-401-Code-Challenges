@@ -1,2 +1,0 @@
-2023-05-25 12:22:38 UTC - my_logger - ERROR - Word list not found: tyjurtj
-2023-05-25 12:22:53 UTC - my_logger - ERROR - Word list not found: fhjfgh

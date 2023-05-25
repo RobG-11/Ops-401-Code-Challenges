@@ -58,10 +58,6 @@ logger.setLevel(logging.WARNING)
 
 ######################### PART VI BEGIN ###############################
 
-# Remove default handlers
-for handler in logger.handlers[:]:
-    logger.removeHandler(handler)
-
 # Create handlers
 c_handler = logging.StreamHandler()
 f_handler = RotatingFileHandler(log_file_time, maxBytes=200, backupCount=5)
