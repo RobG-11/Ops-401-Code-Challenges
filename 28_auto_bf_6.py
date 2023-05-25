@@ -1,4 +1,4 @@
-# Script: 28 - Automated Brute Force Wordlist Attack Tool Part 6 of 6 - INCOMPLETE
+# Script: 28 - Automated Brute Force Wordlist Attack Tool Part 6 of 6 - COMPLETE
 # Author: Robert Gregor
 # Date of latest revision: 23 MAY 23
 
@@ -54,16 +54,19 @@ log_file_time = datetime.now().strftime("log-%Y-%m-%d.txt")
 # Create logger
 logger = logging.getLogger('my_logger')
 # Set log level
-logger.setLevel(logging.INFO)
-# Create RotatingFileHandler
+logger.setLevel(logging.WARNING)
 
 ######################### PART VI BEGIN ###############################
+
+# Remove default handlers
+for handler in logger.handlers[:]:
+    logger.removeHandler(handler)
 
 # Create handlers
 c_handler = logging.StreamHandler()
 f_handler = RotatingFileHandler(log_file_time, maxBytes=200, backupCount=5)
 
-c_handler.setLevel(logging.INFO)
+c_handler.setLevel(logging.WARNING)
 f_handler.setLevel(logging.ERROR)
 
 # Create formatters and add to handlers
@@ -104,9 +107,9 @@ def wordlist_iterate():
                     print(variable)
     else:
         # Call logging.info function with invalid user word list as 2nd arguement
+        print()
         logger.error('Word list not found: %s', word_list)
-        # Print error to terminal
-        print("\nERROR - Word list not found, please try again!")
+        
                
 def recog_passwd():
     # Accepts user input for word list and password to query
@@ -286,9 +289,8 @@ while True:
     
     else:
         # Call logging.info function with invalid user input as 2nd arguement
-        logger.error('Invalid Input Received: %s', user_option)
-        # Print error to terminal
-        print("\nERROR - Invalid input, please try again!")
+        print()
+        logger.warning('Invalid Input Received: %s', user_option)
         continue
 
 
