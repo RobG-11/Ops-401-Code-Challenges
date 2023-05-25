@@ -23,6 +23,18 @@
     # [logging.handlers — Logging handlers](https://docs.python.org/3/library/logging.handlers.html)
     # [Logging Cookbook](https://python.readthedocs.io/en/stable/howto/logging-cookbook.html)
 
+# Objectives (PART VI)
+    # Use StreamHandler and FileHandler in your Python script
+        # FileHandler should write to a local file
+        # StreamHandler should output to the terminal
+
+# My Sources (PART VI)
+    # [Python: How to Create Rotating Logs](https://www.blog.pythonlibrary.org/2014/02/11/python-how-to-create-rotating-logs/)
+    # [logging — Logging facility for Python](https://docs.python.org/3/library/logging.html)
+    # [logging setLevel, how it works](https://stackoverflow.com/questions/6614078/logging-setlevel-how-it-works)
+    # [logging.handlers — Logging handlers](https://docs.python.org/3/library/logging.handlers.html)
+    # [Logging Cookbook](https://python.readthedocs.io/en/stable/howto/logging-cookbook.html)
+
 #!/usr/bin/env python
 
 # Import libraries
@@ -30,13 +42,13 @@ import time, getpass, os, re
 import paramiko, hashlib
 from zipfile import ZipFile
 
-# Import Libraries for PART IV
+# Import Libraries
 import logging
 import os
 from datetime import datetime
-
-# Import library
 from logging.handlers import RotatingFileHandler
+
+
 # Stores formatted date and time in log_file_time variable
 log_file_time = datetime.now().strftime("log-%Y-%m-%d.txt")
 # Create logger
@@ -44,13 +56,28 @@ logger = logging.getLogger('my_logger')
 # Set log level
 logger.setLevel(logging.INFO)
 # Create RotatingFileHandler
-handler = logging.handlers.RotatingFileHandler(log_file_time, maxBytes=200, backupCount=5)
-# Create formatter
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S %Z')
-# Set formatter for handler
-handler.setFormatter(formatter)
-# Add handler to logger
-logger.addHandler(handler)
+
+######################### PART VI BEGIN ###############################
+
+# Create handlers
+c_handler = logging.StreamHandler()
+f_handler = RotatingFileHandler(log_file_time, maxBytes=200, backupCount=5)
+
+c_handler.setLevel(logging.INFO)
+f_handler.setLevel(logging.ERROR)
+
+# Create formatters and add to handlers
+c_format = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+f_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S %Z')
+
+c_handler.setFormatter(c_format)
+f_handler.setFormatter(f_format)
+
+# Add handlers to logger
+logger.addHandler(c_handler)
+logger.addHandler(f_handler)
+
+######################### PART VI END ###################################################
 
 # Logs program execution time
 logger.info('Program Executed')
@@ -77,7 +104,7 @@ def wordlist_iterate():
                     print(variable)
     else:
         # Call logging.info function with invalid user word list as 2nd arguement
-        logger.info('Word list not found: %s', word_list)
+        logger.error('Word list not found: %s', word_list)
         # Print error to terminal
         print("\nERROR - Word list not found, please try again!")
                
@@ -259,7 +286,7 @@ while True:
     
     else:
         # Call logging.info function with invalid user input as 2nd arguement
-        logger.info('Invalid Input Received: %s', user_option)
+        logger.error('Invalid Input Received: %s', user_option)
         # Print error to terminal
         print("\nERROR - Invalid input, please try again!")
         continue

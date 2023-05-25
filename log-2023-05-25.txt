@@ -1,0 +1,2 @@
+2023-05-25 12:02:47 UTC - my_logger - ERROR - Invalid Input Received: tyjrtyj
+2023-05-25 12:02:51 UTC - my_logger - ERROR - Invalid Input Received: tyt
