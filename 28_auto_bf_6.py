@@ -29,11 +29,7 @@
         # StreamHandler should output to the terminal
 
 # My Sources (PART VI)
-    # [Python: How to Create Rotating Logs](https://www.blog.pythonlibrary.org/2014/02/11/python-how-to-create-rotating-logs/)
-    # [logging — Logging facility for Python](https://docs.python.org/3/library/logging.html)
-    # [logging setLevel, how it works](https://stackoverflow.com/questions/6614078/logging-setlevel-how-it-works)
-    # [logging.handlers — Logging handlers](https://docs.python.org/3/library/logging.handlers.html)
-    # [Logging Cookbook](https://python.readthedocs.io/en/stable/howto/logging-cookbook.html)
+    # [Logging in Python](https://realpython.com/python-logging/#using-handlers)
 
 #!/usr/bin/env python
 
