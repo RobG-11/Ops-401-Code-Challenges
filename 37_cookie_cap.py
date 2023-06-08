@@ -1,4 +1,4 @@
-# Script: 37 - Cookie Capture Capades **INCOMPLETE**
+# Script: 37 - Cookie Capture Capades **COMPLETE**
 # Author: Robert Gregor
 # Date of latest revision: 07 JUN 23
 
