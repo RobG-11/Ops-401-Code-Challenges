@@ -16,7 +16,7 @@
 
 #!/usr/bin/env python
 
-import requests, webbrowser, os
+import requests, webbrowser, os, subprocess
 
 # targetsite = input("Enter target site:") # Uncomment this to accept user input target site
 targetsite = "http://www.whatarecookies.com/cookietest.asp" # Comment this out if you're using the line above
@@ -53,7 +53,8 @@ with open('response.html', 'w') as f:
 
 # Declare variable equal to firefox path
 firefox_path = '/usr/bin/firefox'
-# Registers firefox to be used by imported browser module by default
-webbrowser.register('firefox', None, webbrowser.BackgroundBrowser(firefox_path), -1)
-# Use webbrowser module to open new firefox tab and navigate to response.html file
-webbrowser.get('firefox').open_new_tab('file://' + os.path.realpath('response.html'))
+# Declares reponse_file_path varilable equal to full path with file:// prepended
+response_file_path = 'file://' + os.path.realpath('response.html')
+
+# Opens file Firefox using subprocess module
+subprocess.run([firefox_path, response_file_path])
