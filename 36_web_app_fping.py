@@ -1,4 +1,4 @@
-# Script: 36 - Web Application Fingerprinting **INCOMPLETE**
+# Script: 36 - Web Application Fingerprinting **COMPLETE**
 # Author: Robert Gregor
 # Date of latest revision: 06 JUN 23
 
