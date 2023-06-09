@@ -1,4 +1,4 @@
-# Script: 38 - XSS Vulnerability Detection with Python **INCOMPLETE**
+# Script: 38 - XSS Vulnerability Detection with Python **COMPLETE**
 # Revised By: Robert Gregor
 # Date of latest revision: 08 JUN 23
 
