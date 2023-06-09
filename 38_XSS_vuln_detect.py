@@ -1,5 +1,5 @@
 # Script: 38 - XSS Vulnerability Detection with Python **INCOMPLETE**
-# Author: Robert Gregor
+# Revised By: Robert Gregor
 # Date of latest revision: 08 JUN 23
 
 # Objectives - Programmatically detect presence (or lack) of XSS vulnerability in given target URL using Python
