@@ -27,12 +27,23 @@ from urllib.parse import urljoin
 # Declare functions
 
 ### TODO: Add function explanation here ###
+
+# Retrieves all form elements from provided url parameter
+    # Parses information and stores in variable
+    # Returns list of forms
+
 ### In your own words, describe the purpose of this function as it relates to the overall objectives of the script ###
 def get_all_forms(url):
     soup = bs(requests.get(url).content, "html.parser")
     return soup.find_all("form")
 
 ### TODO: Add function explanation here ###
+
+# Retrieves form details from provided form parameter
+    # Declares dictionary to store form details extracted from element list
+    # Declares list to store element details
+    # Returns detail dictionary with action, method, and inputs included
+
 ### In your own words, describe the purpose of this function as it relates to the overall objectives of the script ###
 def get_form_details(form):
     details = {}
@@ -49,6 +60,11 @@ def get_form_details(form):
     return details
 
 ### TODO: Add function explanation here ###
+
+# Submit modified form and return server response
+    # Create URL for form submission
+    # Create dictionary to store specified input values
+
 ### In your own words, describe the purpose of this function as it relates to the overall objectives of the script ###
 def submit_form(form_details, url, value):
     target_url = urljoin(url, form_details["action"])
@@ -68,11 +84,18 @@ def submit_form(form_details, url, value):
         return requests.get(target_url, params=data)
 
 ### TODO: Add function explanation here ###
+
+# Conduct vulnerability scan
+    # Retrieves all forms and prints total
+    # Establishes script to use to test form fields
+    # Submit form with javascript in text fields and store server reponse in content variable
+    # Determine if java script is reflected in server reponse
+
 ### In your own words, describe the purpose of this function as it relates to the overall objectives of the script ###
 def scan_xss(url):
     forms = get_all_forms(url)
     print(f"[+] Detected {len(forms)} forms on {url}.")
-    js_script = ### TODO: Add HTTP and JS code here that will cause a XSS-vulnerable field to create an alert prompt with some text.
+    js_script = "<script>alert('XSS Permitted!!!')</script>" ### TODO: Add HTTP and JS code here that will cause a XSS-vulnerable field to create an alert prompt with some text.
     is_vulnerable = False
     for form in forms:
         form_details = get_form_details(form)
@@ -87,6 +110,11 @@ def scan_xss(url):
 # Main
 
 ### TODO: Add main explanation here ###
+
+# Ensures script is only executed when run directly
+    # Requests user input for url
+    # Prints results of scan_xss function executed with user provided url
+
 ### In your own words, describe the purpose of this main as it relates to the overall objectives of the script ###
 if __name__ == "__main__":
     url = input("Enter a URL to test for XSS:") 
