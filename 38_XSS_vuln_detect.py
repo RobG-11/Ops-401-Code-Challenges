@@ -122,4 +122,4 @@ if __name__ == "__main__":
 
 ### TODO: When you have finished annotating this script with your own comments, copy it to Web Security Dojo
 ### TODO: Test this script against one XSS-positive target and one XSS-negative target
-### TODO: Paste the outputs here as comments in this script, clearling indicating which is positive detection and negative detection
+### TODO: Paste the outputs here as comments in this script, clearly indicating which is positive detection and negative detection
