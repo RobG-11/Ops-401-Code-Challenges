@@ -1,4 +1,4 @@
-# Script: 42 - Attack Tools Part 2 of 3 **INCOMPLETE**
+# Script: 42 - Attack Tools Part 2 of 3 **COMPLETE**
 # Revised By: Robert Gregor
 # Date of latest revision: 13 JUN 23
 
